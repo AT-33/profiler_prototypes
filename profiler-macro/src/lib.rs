@@ -1,6 +1,7 @@
 use quote::{quote, TokenStreamExt};
 use proc_macro2::{TokenStream, TokenTree, Group, Delimiter, Literal};
 
+/** Extracts name of a function from its TokenStream. */
 fn get_function_name(fn_stream: TokenStream, attr_stream: TokenStream) -> TokenTree {
     let tree = fn_stream.into_iter().nth(1)
         .expect("Can't get function name");
@@ -10,7 +11,7 @@ fn get_function_name(fn_stream: TokenStream, attr_stream: TokenStream) -> TokenT
     else if let TokenTree::Ident(id) = tree {
         TokenTree::Literal(Literal::string(id.to_string().as_str()))
     } else {
-        panic!("Function name was not an identifier")
+        panic!("Function name was not an identifier: {}", tree)
     }
 }
 
@@ -24,7 +25,7 @@ Is transformed to:
     fn foo() -> T {
         test_profiler::profile_event("foo", true); // begin event
 
-        let _return_value: T = { /* code here */ };
+        let _return_value = { /* code here */ };
 
         test_profiler::profile_event("foo", false); // end event
         _return_value

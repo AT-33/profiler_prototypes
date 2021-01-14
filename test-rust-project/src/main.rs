@@ -6,14 +6,12 @@ use std::{
     io::prelude::*,
 };
 
+#[profile_func]
 fn factorial(x: u128) -> u128 {
-    test_profiler::profile_event("factorial", true);
-    let f = match x {
+    match x {
         0..=1 => 1,
         _ => x * factorial(x - 1),
-    };
-    test_profiler::profile_event("factorial", false);
-    f
+    }
 }
 
 fn main() {
