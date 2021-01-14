@@ -1,0 +1,15 @@
+[package]
+name = "profiler-macro"
+version = "0.1.0"
+authors = ["n-dub <ragucoz@gmail.com>"]
+edition = "2018"
+
+[lib]
+proc-macro = true
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+test-profiler = { path = "../test-profiler" }
+quote = "1.0"
+proc-macro2 = "1.0.24"
